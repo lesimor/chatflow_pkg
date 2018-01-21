@@ -1,0 +1,28 @@
+{
+  "states": {
+    "rZgGg": {
+      "name": "entry",
+      "message": "안녕하세요."
+    },
+    "jmzPh": {
+      "name": "날씨안내",
+      "message": "오늘 하루종일 맑겠습니다."
+    },
+    "FBTmI": {
+      "name": "미세먼지 안내",
+      "message": "오늘의 미세먼지 농도는 나쁨입니다."
+    },
+    "Xr2Hm": {
+      "name": "예외처리",
+      "message": "무슨말인지 모르겠어요."
+    },
+    "uzZvh": {
+      "name": "길 안내",
+      "message": "교대역에서 신촌역까지 약 40분 소요됩니다."
+    }
+  },
+  "meta": {
+    "entry": "rZgGg",
+    "exception": "Xr2Hm"
+  }
+}

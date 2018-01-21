@@ -2,11 +2,11 @@ from setuptools import setup, find_packages
 
 setup(
     name='chatflow',
-    version='1.0.1',
+    version='0.0.1',
     description='Python wrapper for ChatFlow.ai',
     license='MIT',
-    author='ByungWook Kang',
-    author_email='lesimor@naver.com',
+    maintainer='ByungWook Kang',
+    maintainer_email='lesimor@naver.com',
     url='https://github.com/lesimor/chatflow_pkg',
     install_requires=['requests'],
     packages=find_packages(exclude=['tests']),
