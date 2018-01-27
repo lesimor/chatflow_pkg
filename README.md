@@ -3,13 +3,12 @@
 ### 시작하기
 
 ```
-cd chatflow
-python3 chatflow.py
+python3 example/example.py
 ```
 
 
 
-### 시나리오 정의
+### 시나리오 예제
 
-- state.json 예제
+- example/state.json
 
