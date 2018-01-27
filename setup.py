@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name='chatflow',
     version='0.0.1',
-    description='Python wrapper for ChatFlow.ai',
+    description='Python Package for ChatBot Developer',
     license='MIT',
     maintainer='ByungWook Kang',
     maintainer_email='lesimor@naver.com',

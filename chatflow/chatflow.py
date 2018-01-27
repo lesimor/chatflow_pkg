@@ -1,8 +1,6 @@
 import json
 import random
 
-from .states import State
-
 
 class ChatFlow(object):
     def __init__(self, path):
