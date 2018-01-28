@@ -1,16 +1,19 @@
 import json
 import random
 
+from .states import State
 
 class ChatFlow(object):
+    _states = {}
+
     def __init__(self, path):
         """ __init__ method."""
         with open(path, 'r') as f:
             json_dict = json.load(f)
 
         # TODO: state의 인스턴스화
-        self.states = json_dict.get('states')
         self.meta = json_dict.get('meta')
+        self.set_states(json_dict.get('states'))
         self._check_meta()
 
     @property
@@ -24,12 +27,16 @@ class ChatFlow(object):
     @property
     def entry_state(self):
         entry_id = self.entry_id
-        return self.states[entry_id]
+        return self._states[entry_id]
 
     @property
     def exception_state(self):
         exception_id = self.exception_id
-        return self.states[exception_id]
+        return self._states[exception_id]
+
+    def set_states(self, states):
+        for id, state in states.items():
+            self._states[id] = State(id, **state)
 
     def _check_meta(self):
         """ test method.
@@ -52,7 +59,7 @@ class ChatFlow(object):
         * Return:
             - state
         """
-        state = self.states.get(state_id)
+        state = self._states.get(state_id)
         if state  is None:
             print("State not exists with id {}. Return exception".format(state_id))
             return self.exception_state
