@@ -49,22 +49,6 @@ class ChatFlow(object):
         if self.exception_id is None:
             raise Exception("Meta exception ID not in state")
 
-    def get_state_by_id(self, state_id):
-        """
-        get state by id
-
-        * Args:
-            - state_id: Reference id
-
-        * Return:
-            - state
-        """
-        state = self._states.get(state_id)
-        if state  is None:
-            print("State not exists with id {}. Return exception".format(state_id))
-            return self.exception_state
-        return state
-
     def get_state(self, state_id):
         """
         transition method.
@@ -76,7 +60,11 @@ class ChatFlow(object):
         Return:
             - state
         """
-        state = self.get_state_by_id(state_id)
+        state = self._states.get(state_id)
+        if state is None:
+            print("State not exists with id {}. Return exception".format(state_id))
+            return self.exception_state
+
         return state
 
     def run(self, current_state_id, message):
@@ -90,10 +78,10 @@ class ChatFlow(object):
             - next_state
         """
         next_state = None
-        current_state = self.get_state_by_id(current_state_id)
+        current_state = self.get_state(current_state_id)
 
         # TODO: current_state -> next_state 분기 로직 삽입
-        next_state_id = random.choice(list(self.states.keys()))
+        next_state_id = random.choice(list(self._states.keys()))
 
         # TODO: state 내부에 적당한 값을 slot에 삽입하여 language generate
         next_state = self.get_state(next_state_id)
