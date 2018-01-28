@@ -17,7 +17,7 @@ def main():
         msg = input("User: ")
         next_state = cf.run(cf.entry_id, msg)  # current state를 임의로 entry로 설정
 
-        print("System: {}".format(next_state.get('message')))
+        print("System: {}".format(next_state.message))
 
 if __name__ == '__main__':
     main()

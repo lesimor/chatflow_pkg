@@ -1,17 +1,20 @@
 import json
 import random
 
+from .states import State
 
 class ChatFlow(object):
+    _states = {}
+
     def __init__(self, path):
         """ __init__ method."""
         with open(path, 'r') as f:
             json_dict = json.load(f)
 
         # TODO: state의 인스턴스화
-        self.states = json_dict.get('states')
         self.meta = json_dict.get('meta')
-        self._check_ingredients()
+        self.set_states(json_dict.get('states'))
+        self._check_meta()
 
     @property
     def entry_id(self):
@@ -24,14 +27,18 @@ class ChatFlow(object):
     @property
     def entry_state(self):
         entry_id = self.entry_id
-        return self.states[entry_id]
+        return self._states[entry_id]
 
     @property
     def exception_state(self):
         exception_id = self.exception_id
-        return self.states[exception_id]
+        return self._states[exception_id]
 
-    def _check_ingredients(self):
+    def set_states(self, states):
+        for id, state in states.items():
+            self._states[id] = State(id, **state)
+
+    def _check_meta(self):
         """ test method.
         Check necessary ingredients
         entry_id and exception_id are required.
@@ -41,22 +48,6 @@ class ChatFlow(object):
 
         if self.exception_id is None:
             raise Exception("Meta exception ID not in state")
-
-    def get_state_by_id(self, state_id):
-        """
-        get state by id
-
-        * Args:
-            - state_id: Reference id
-
-        * Return:
-            - state
-        """
-        state = self.states.get(state_id)
-        if state  is None:
-            print("State not exists with id {}. Return exception".format(state_id))
-            return self.exception_state
-        return state
 
     def get_state(self, state_id):
         """
@@ -69,7 +60,11 @@ class ChatFlow(object):
         Return:
             - state
         """
-        state = self.get_state_by_id(state_id)
+        state = self._states.get(state_id)
+        if state is None:
+            print("State not exists with id {}. Return exception".format(state_id))
+            return self.exception_state
+
         return state
 
     def run(self, current_state_id, message):
@@ -83,10 +78,10 @@ class ChatFlow(object):
             - next_state
         """
         next_state = None
-        current_state = self.get_state_by_id(current_state_id)
+        current_state = self.get_state(current_state_id)
 
         # TODO: current_state -> next_state 분기 로직 삽입
-        next_state_id = random.choice(list(self.states.keys()))
+        next_state_id = random.choice(list(self._states.keys()))
 
         # TODO: state 내부에 적당한 값을 slot에 삽입하여 language generate
         next_state = self.get_state(next_state_id)
