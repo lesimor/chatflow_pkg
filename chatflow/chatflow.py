@@ -11,7 +11,7 @@ class ChatFlow(object):
         # TODO: state의 인스턴스화
         self.states = json_dict.get('states')
         self.meta = json_dict.get('meta')
-        self._check_ingredients()
+        self._check_meta()
 
     @property
     def entry_id(self):
@@ -31,7 +31,7 @@ class ChatFlow(object):
         exception_id = self.exception_id
         return self.states[exception_id]
 
-    def _check_ingredients(self):
+    def _check_meta(self):
         """ test method.
         Check necessary ingredients
         entry_id and exception_id are required.
