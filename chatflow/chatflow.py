@@ -6,15 +6,19 @@ from .states import State
 class ChatFlow(object):
     _states = {}
 
-    def __init__(self, path):
+    def __init__(self, json_dict):
         """ __init__ method."""
-        with open(path, 'r') as f:
-            json_dict = json.load(f)
-
         # TODO: state의 인스턴스화
         self.meta = json_dict.get('meta')
         self.set_states(json_dict.get('states'))
         self._check_meta()
+
+    @classmethod
+    def init_with_path(cls, path):
+        with open(path, 'r') as f:
+            json_dict = json.load(f)
+
+        return cls(json_dict)
 
     @property
     def entry_id(self):
