@@ -1,6 +1,6 @@
 import unittest
 
-from chatflow.states import State
+from chatflow.state import State
 
 class TestStates(unittest.TestCase):
     def test_state(self):
