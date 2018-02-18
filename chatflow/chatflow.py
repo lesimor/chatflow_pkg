@@ -17,14 +17,14 @@ class ChatFlow(object):
         for key, state in states_from_json_dict.items():
             self.states.setdefault(key, State(key, state))
 
-        self.transition = transition_cls(json_dict)
+        self.transition = transition_cls(self)
 
     @classmethod
-    def init_with_path(cls, path):
+    def init_with_path(cls, path, transition_cls):
         with open(path, 'r') as f:
             json_dict = json.load(f)
 
-        return cls(json_dict)
+        return cls(json_dict, transition_cls)
 
     @property
     def entry_state(self):
@@ -66,7 +66,7 @@ class ChatFlow(object):
         """
         current_state = self.get_state(current_state_id)
 
-        func = getattr(self.transition, current_state.id)
+        func = getattr(self.transition, current_state.transition)
 
         next_state = func(payload)
 

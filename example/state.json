@@ -2,23 +2,28 @@
   "states": {
     "rZgGg": {
       "name": "entry",
-      "message": "안녕하세요."
+      "message": "안녕하세요.",
+      "transition": "entry"
     },
     "jmzPh": {
       "name": "날씨안내",
-      "message": "오늘 하루종일 맑겠습니다."
+      "message": "오늘 하루종일 맑겠습니다.",
+      "transition": "inform_weather"
     },
     "FBTmI": {
       "name": "미세먼지 안내",
-      "message": "오늘의 미세먼지 농도는 나쁨입니다."
+      "message": "오늘의 미세먼지 농도는 나쁨입니다.",
+      "transition": "inform_fine_weather"
     },
     "Xr2Hm": {
       "name": "예외처리",
-      "message": "무슨말인지 모르겠어요."
+      "message": "무슨말인지 모르겠어요.",
+      "transition": "exception_state"
     },
     "uzZvh": {
       "name": "길 안내",
-      "message": "교대역에서 신촌역까지 약 40분 소요됩니다."
+      "message": "교대역에서 신촌역까지 약 40분 소요됩니다.",
+      "transition": "inform_direction"
     }
   },
   "meta": {

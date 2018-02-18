@@ -13,20 +13,20 @@ class CustomTransition(Transition):
     def __init__(self, json_dict):
         super().__init__(json_dict)
 
-    def rZgGg(self, payload):
-        return self.states.get('jmzPh')
+    def entry(self, payload):
+        return self.get_state('jmzPh')
 
-    def jmzPh(self, payload):
-        return self.states.get('FBTmI')
+    def inform_weather(self, payload):
+        return self.get_state('FBTmI')
 
-    def FBTmI(self, payload):
-        return self.states.get('Xr2Hm')
+    def inform_fine_weather(self, payload):
+        return self.get_state('Xr2Hm')
 
-    def Xr2Hm(self, payload):
-        return self.states.get('uzZvh')
+    def exception_state(self, payload):
+        return self.get_state('uzZvh')
 
-    def uzZvh(self, payload):
-        return self.states.get('rZgGg')
+    def inform_direction(self, payload):
+        return self.get_state('rZgGg')
 
 def main():
     file_name = 'state.json'
@@ -38,11 +38,11 @@ def main():
     cf = ChatFlow(json_dict, CustomTransition)
 
     msg = None
-    current_state_id = cf.entry_state.id
+    current_state_id = cf.entry_state.id # current state를 임의로 entry로 설정
 
     while msg != 'q':
         msg = input("User: ")
-        next_state = cf.run(current_state_id, {'message': msg})  # current state를 임의로 entry로 설정
+        next_state = cf.run(current_state_id, {'message': msg})
 
         print(next_state.__dict__)
 

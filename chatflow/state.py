@@ -7,6 +7,7 @@ class State(object):
         self.__id = id
         self.__name = state_dict.get(StateJsonLoader.NAME, '')
         self.message = state_dict.get(StateJsonLoader.MESSAGE, {})
+        self.transition = state_dict.get(StateJsonLoader.TRANSITION, '')
 
     @property
     def id(self):
@@ -15,12 +16,4 @@ class State(object):
     @property
     def name(self):
         return self.__name
-
-    @property
-    def message(self):
-        return self.__message
-
-    @message.setter
-    def message(self, val):
-        self.__message = val
 

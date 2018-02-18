@@ -6,6 +6,7 @@ class StateJsonLoader(object):
     ID = 'id'
     NAME = 'name'
     MESSAGE = 'message'
+    TRANSITION = 'transition'
 
     META = 'meta'
     ENTRY_ID = 'entry_id'
@@ -30,6 +31,8 @@ class StateJsonLoader(object):
                 raise Exception('State name cannot be null')
             if not state.get(cls.MESSAGE, {}):
                 raise Exception('State message cannot be null')
+            if not state.get(cls.TRANSITION, ''):
+                raise Exception('transition method name cannot be null')
 
         # Meta check
         meta = json_dict.get(cls.META, {})
